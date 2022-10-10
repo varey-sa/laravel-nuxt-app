@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/login', [AuthController::class, 'login']);
+
+//category
+Route::get('/categories', [CategoryController::class, 'index']);
+
+// products
+Route::get('/products/category/{id}',[ProductController::class ,'getByCategory']);
+Route::get('/products',[ProductController::class ,'index']);
+Route::get('/products/{id}',[ProductController::class ,'getOne']);
+Route::delete('/products/{id}',[ProductController::class ,'deleteOne']);
